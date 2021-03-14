@@ -1,5 +1,10 @@
 <ons-page>
-    <body>
-        <p>sample home page</p>
-    </body>
+    <ons-tabbar>
+        <div class="tabbar__content"></div>
+        <div class="tabbar">
+            <ons-tab label="本日のおすすめ" [page]="random" active></ons-tab>
+            <ons-tab label="検索"></ons-tab>
+        </div>
+    </ons-tabbar>
+    
 </ons-page>

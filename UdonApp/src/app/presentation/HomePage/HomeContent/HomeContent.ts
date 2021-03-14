@@ -1,6 +1,7 @@
 import { Component, Injectable } from '@angular/core';
 
 import * as ons from 'onsenui';
+import { RandomPage } from '../../RandomPage/RandomPage/RandomPage';
 
 @Injectable({
   providedIn:'root'
@@ -8,10 +9,10 @@ import * as ons from 'onsenui';
 @Component({
   selector: 'app-HomeContent',
   templateUrl: './HomeContent.html',
-  styleUrls: ['./HomeContent.css']
+  styleUrls: ['./HomeContent.css'],
 })
 export class HomeContent {
-  title = 'UdonApp';
+  public random = RandomPage;
 
   constructor(){}
 }

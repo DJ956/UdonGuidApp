@@ -5,15 +5,19 @@ import { OnsenModule } from 'ngx-onsenui';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { HomeContent } from './presentation/HomePage/HomeContent/HomeContent';
+import { HomePage } from './presentation/HomePage/HomePage/HomePage';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeContent,
+    HomePage,
   ],
   imports: [
     BrowserModule,
     OnsenModule,
-    AppRoutingModule
+    AppRoutingModule,    
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

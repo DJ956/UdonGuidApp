@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { UdonShopRequestModel } from "src/app/model/request/UdonShopRequest.model";
+import { UdonShopModel } from "src/app/model/resource/UdonShop.model";
 import { UdonShopResponseModel } from "src/app/model/response/UdonShopResponse.model";
 import { UdonShopRepository } from "src/app/repository/UdonShopRepository/UdonShop.repository";
 
@@ -8,7 +9,10 @@ import { UdonShopRepository } from "src/app/repository/UdonShopRepository/UdonSh
     providedIn:'root'
 })
 export class UdonShopService{
-    constructor(private udonShopRepository:UdonShopRepository){
+
+    public $udonShops:UdonShopModel[]
+    constructor(private udonShopRepository:UdonShopRepository){                    
+        this.$udonShops = [];        
     }
 
 
@@ -22,6 +26,7 @@ export class UdonShopService{
             this.udonShopRepository.fetchUdonShops(request).subscribe({
                 next(response){
                     if(response.ReturnCode === 0){
+                        this.$udonShops = response.UdonShops;
                         resolve(response);
                     }else{
                         reject(response.Message);
@@ -31,6 +36,8 @@ export class UdonShopService{
                     reject(e);
                 }
             });
-        });
+        });        
     }
+
+
 }

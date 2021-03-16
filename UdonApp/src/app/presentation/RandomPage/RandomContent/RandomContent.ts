@@ -35,6 +35,16 @@ export class RandomContent implements OnInit {
       }
     }
 
+    getHolidaysText(shop:UdonShopModel) : String{
+      let txt : String = "";
+      shop.Holidays.forEach(h =>{
+        txt += h.Name + " ";
+      });
+
+      return txt;
+    }
+
+
 
 
 }

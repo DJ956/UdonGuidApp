@@ -10,4 +10,5 @@ export interface UdonShopModel{
     ExistsCoinParking:boolean,  //コインパーキングあり
     ExistsParking:boolean       //駐車場有
     Comment:string,             //コメント
+    MapURL:string,              //GoogleMapURL
 }

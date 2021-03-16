@@ -19,7 +19,7 @@ export class MockUdonShopRepository extends UdonShopRepository{
             UdonShops:[
                 {
                     Id:0,
-                    Name:'',
+                    Name:'さかえだ',
                     ShopType:0,
                     StartTime:new Date(0,0,0,12,30,0,0),
                     EndTime:new Date(0,0,0,15,30,0,0),
@@ -29,8 +29,24 @@ export class MockUdonShopRepository extends UdonShopRepository{
                     ],
                     ExistsCoinParking:true,
                     ExistsParking:true,
-                    Comment:'サンプルコメント'
+                    Comment:'サンプルコメント',
+                    MapURL:"",
                 },
+
+                {
+                    Id:0,
+                    Name:'たもや',
+                    ShopType:1,
+                    StartTime:new Date(0,0,0,12,30,0,0),
+                    EndTime:new Date(0,0,0,15,30,0,0),
+                    Holidays:[
+                        {Id:0, Name:"日曜日"},                        
+                    ],
+                    ExistsCoinParking:true,
+                    ExistsParking:true,
+                    Comment:'サンプルコメント',
+                    MapURL:"",
+                }
             ]
         };
 

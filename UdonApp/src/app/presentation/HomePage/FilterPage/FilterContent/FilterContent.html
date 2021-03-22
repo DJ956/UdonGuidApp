@@ -1,0 +1,66 @@
+<ons-page>
+    <div class="background"></div>
+    <div class="content" class="normal-page">
+        <br>
+        <ons-list modifier="inset">
+            <ons-list-header>
+                <div style="text-align: center;" class="center">フィルター条件</div>
+            </ons-list-header>
+
+
+            <ons-list-header modifier="longdivider">
+                <div class="center">距離でフィルター</div>                
+            </ons-list-header>
+            <ons-list-item modifier="longdivider">
+                <div class="center"><p>5km圏内の店</p></div>
+                <div class="right">
+                    <ons-switch [value]="this.within5km"></ons-switch>
+                </div>
+            </ons-list-item>
+            <ons-list-item modifier="longdivider">
+                <div class="center"><p>10km圏内の店</p></div>
+                <div class="right">
+                    <ons-switch [value]="this.within10km"></ons-switch>
+                </div>
+            </ons-list-item>
+
+            
+            <ons-list-header modifier="longdivider">
+                <div class="center">営業時間でフィルター</div>
+            </ons-list-header>
+
+            <ons-list-item modifier="longdivider">
+                <div class="center">営業時間内</div>
+                <div class="right">
+                    <ons-switch [value]="this.businessCondition"></ons-switch>
+                </div>
+            </ons-list-item>
+
+            <ons-list-item modifier="longdivider">
+                <div class="center"><p>午前中</p></div>
+                <div class="right">
+                    <ons-switch [value]="this.amCondition"></ons-switch>
+                </div>
+            </ons-list-item>
+
+            <ons-list-item modifier="longdivider">
+                <div class="center"><p>午後</p></div>
+                <div class="right">
+                    <ons-switch [value]="this.pmCondition"></ons-switch>
+                </div>
+            </ons-list-item>
+
+            <ons-list-header modifier="longdivider">
+                <div class="center">営業日フィルター</div>
+            </ons-list-header>
+
+            <ons-list-item modifier="longdivider">
+                <div class="center">今日が定休日でない店舗</div>
+                <div class="right">
+                    <ons-switch [value]="this.notHoliday"></ons-switch>
+                </div>
+            </ons-list-item>
+
+        </ons-list>
+    </div>
+</ons-page>

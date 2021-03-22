@@ -11,6 +11,8 @@ import { RandomPage } from './presentation/RandomPage/RandomPage/RandomPage';
 import { RandomContent } from './presentation/RandomPage/RandomContent/RandomContent';
 import { UdonShopRepository } from './repository/UdonShopRepository/UdonShop.repository';
 import { MockUdonShopRepository } from './infra/repository/UdonShopRepository/MockUdonShop.repository';
+import { FilterContent } from './presentation/HomePage/FilterPage/FilterContent/FilterContent';
+import { FilterPage } from './presentation/HomePage/FilterPage/FilterPage/FilterPage';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { MockUdonShopRepository } from './infra/repository/UdonShopRepository/Mo
     HomePage,
     RandomPage,
     RandomContent,
+    FilterContent,
+    FilterPage,
   ],
   imports: [
     BrowserModule,
@@ -27,6 +31,7 @@ import { MockUdonShopRepository } from './infra/repository/UdonShopRepository/Mo
   ],
   entryComponents:[
     RandomPage,
+    FilterPage,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

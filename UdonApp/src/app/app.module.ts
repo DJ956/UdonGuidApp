@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
 import { OnsenModule } from 'ngx-onsenui';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +14,8 @@ import { UdonShopRepository } from './repository/UdonShopRepository/UdonShop.rep
 import { MockUdonShopRepository } from './infra/repository/UdonShopRepository/MockUdonShop.repository';
 import { FilterContent } from './presentation/HomePage/FilterPage/FilterContent/FilterContent';
 import { FilterPage } from './presentation/HomePage/FilterPage/FilterPage/FilterPage';
+import { SearchPage } from './presentation/SearchPage/SearchPage/SearchPage';
+import { SearchContent } from './presentation/SearchPage/SearchContent/SearchContent';
 
 @NgModule({
   declarations: [
@@ -23,22 +26,26 @@ import { FilterPage } from './presentation/HomePage/FilterPage/FilterPage/Filter
     RandomContent,
     FilterContent,
     FilterPage,
+    SearchPage,
+    SearchContent,
   ],
   imports: [
     BrowserModule,
     OnsenModule,
-    AppRoutingModule,    
+    AppRoutingModule,
+    HttpClient,
   ],
-  entryComponents:[
+  entryComponents: [
     RandomPage,
     FilterPage,
+    SearchPage,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
   ],
   providers: [
-    {provide:UdonShopRepository, useClass:MockUdonShopRepository},
-    
+    { provide: UdonShopRepository, useClass: MockUdonShopRepository },
+
   ],
   bootstrap: [AppComponent]
 })

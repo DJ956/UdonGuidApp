@@ -16,7 +16,7 @@ export class UdonShopImplRepository extends UdonShopRepository {
     }
 
     fetchUdonShops(request: UdonShopRequestModel): Observable<UdonShopResponseModel> {
-        return this.client.post<UdonShopResponseModel>(`${APIUrl.BASE_URL}/api/UdonShopController/`, request);
+        return this.client.get<UdonShopResponseModel>(`${APIUrl.BASE_URL}/api/UdonShop/GetAllUdonShop`);
     }
 
 }

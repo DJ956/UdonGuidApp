@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { OnsenModule } from 'ngx-onsenui';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +16,9 @@ import { FilterContent } from './presentation/HomePage/FilterPage/FilterContent/
 import { FilterPage } from './presentation/HomePage/FilterPage/FilterPage/FilterPage';
 import { SearchPage } from './presentation/SearchPage/SearchPage/SearchPage';
 import { SearchContent } from './presentation/SearchPage/SearchContent/SearchContent';
+import { UdonShopImplRepository } from './infra/repository/UdonShopRepository/UdonShopImpl.repository';
+import { CodeMasterRepository } from './repository/CodeMasterRepository/CodeMaster.repository';
+import { CodeMasterImplRepository } from './infra/repository/CodeMasterRepository/CodeMasterImpl.repository';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,7 @@ import { SearchContent } from './presentation/SearchPage/SearchContent/SearchCon
     BrowserModule,
     OnsenModule,
     AppRoutingModule,
-    HttpClient,
+    HttpClientModule,
   ],
   entryComponents: [
     RandomPage,
@@ -44,7 +47,8 @@ import { SearchContent } from './presentation/SearchPage/SearchContent/SearchCon
     CUSTOM_ELEMENTS_SCHEMA,
   ],
   providers: [
-    { provide: UdonShopRepository, useClass: MockUdonShopRepository },
+    { provide: UdonShopRepository, useClass: UdonShopImplRepository },
+    { provide: CodeMasterRepository, useClass: CodeMasterImplRepository },
 
   ],
   bootstrap: [AppComponent]

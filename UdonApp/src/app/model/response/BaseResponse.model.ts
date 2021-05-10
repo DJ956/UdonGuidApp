@@ -1,6 +1,6 @@
-export interface BaseResponseModel{
-    ReturnCode:number,
-    Message:string,
-    ErrorCode:string,
-    ErrorCause:string,
+export interface BaseResponseModel {
+    returnCode: number,
+    message: string,
+    errorCode: string,
+    errorCause: string,
 }

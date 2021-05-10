@@ -5,71 +5,64 @@ import { UdonShopResponseModel } from "src/app/model/response/UdonShopResponse.m
 import { UdonShopRepository } from "src/app/repository/UdonShopRepository/UdonShop.repository";
 
 @Injectable({
-    providedIn:'root'
+    providedIn: 'root'
 })
-export class MockUdonShopRepository extends UdonShopRepository{
+export class MockUdonShopRepository extends UdonShopRepository {
 
     fetchUdonShops(request: UdonShopRequestModel): Observable<UdonShopResponseModel> {
-        
-        let response:UdonShopResponseModel = {
-            ReturnCode:0,
-            Message:'',
-            ErrorCode:'',
-            ErrorCause:'',
-            UdonShops:[
+
+        let response: UdonShopResponseModel = {
+            returnCode: 0,
+            message: '',
+            errorCode: '',
+            errorCause: '',
+            udonShops: [
                 {
-                    Id:0,
-                    Name:'さかえだ',
-                    ShopType:0,
-                    StartTime:new Date(0,0,0,12,30,0,0),
-                    EndTime:new Date(0,0,0,15,30,0,0),
-                    Holidays:[
-                        {Id:0, Name:"日曜日"},
-                        {Id:1,Name:"土曜日"}
-                    ],
-                    ExistsCoinParking:true,
-                    ExistsParking:true,
-                    Comment:'サンプルコメント',
-                    MapURL:"",
+                    id: 0,
+                    shopName: 'さかえだ',
+                    shopType: 0,
+                    startTime: "12:30:00",
+                    endTime: "15:00:00",
+                    holidays: "0",
+                    existsCoinParking: true,
+                    existsParking: true,
+                    comment: 'サンプルコメント',
+                    mapURL: "",
                 },
 
                 {
-                    Id:0,
-                    Name:'たもや',
-                    ShopType:1,
-                    StartTime:new Date(0,0,0,12,30,0,0),
-                    EndTime:new Date(0,0,0,14,30,0,0),
-                    Holidays:[
-                        {Id:0, Name:"日曜日"},                        
-                    ],
-                    ExistsCoinParking:true,
-                    ExistsParking:true,
-                    Comment:'サンプルコメント',
-                    MapURL:"",
+                    id: 0,
+                    shopName: 'たもや',
+                    shopType: 1,
+                    startTime: "12:30:00",
+                    endTime: "14:00:00",
+                    holidays: "0",
+                    existsCoinParking: true,
+                    existsParking: true,
+                    comment: 'サンプルコメント',
+                    mapURL: "",
                 },
 
                 {
-                    Id:0,
-                    Name:'根っこ',
-                    ShopType:0,
-                    StartTime:new Date(0,0,0,9,30,0,0),
-                    EndTime:new Date(0,0,0,23,30,0,0),
-                    Holidays:[
-                        {Id:0, Name:"日曜日"},                        
-                    ],
-                    ExistsCoinParking:true,
-                    ExistsParking:true,
-                    Comment:'サンプルコメント',
-                    MapURL:"",
+                    id: 0,
+                    shopName: '根っこ',
+                    shopType: 0,
+                    startTime: "09:30:00",
+                    endTime: "23:30:00",
+                    holidays: "0",
+                    existsCoinParking: true,
+                    existsParking: true,
+                    comment: 'サンプルコメント',
+                    mapURL: "",
                 }
             ]
         };
 
-        return new Observable((observer) =>{
-            of(1)                        
-            .subscribe((res) =>{
-                observer.next(response);
-            });
+        return new Observable((observer) => {
+            of(1)
+                .subscribe((res) => {
+                    observer.next(response);
+                });
         });
     }
 

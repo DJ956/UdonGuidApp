@@ -1,50 +1,55 @@
 <ons-page>
     <div class="background"></div>
     <div class="content">
-        <br>   
+        <br>
         <ons-list modifier="inset">
             <ons-list-header>
                 <a style="margin-right: 5px;">うどん店</a>
-                <span class="notification notification--material">{{$udonShops.length}}</span>                
+                <span class="notification notification--material">{{$udonShops.length}}</span>
                 <span>件</span>
             </ons-list-header>
-    
-            <ons-list-item modifier="longdivider" *ngFor="let shop of $udonShops; index as i">                
+
+            <ons-list-item modifier="longdivider" *ngFor="let shop of $udonShops; index as i">
                 <ons-row>
-                    <ons-row>                        
+                    <ons-row>
                         <ons-col width="30%">
-                            <h3><b>{{shop.Name}}</b></h3>
+                            <h3><b>{{shop.shopName}}</b></h3>
                         </ons-col>
                         <ons-col width="15%">
-                            <span #normalBtn (click)="normalPop.show(normalBtn)" *ngIf="shop.ShopType == 0"><img src="../../../../../assets/normal.png"></span>
-                            <span #selftBtn (click)="selftPop.show(selftBtn)" *ngIf="shop.ShopType == 1"><img src="../../../../../assets/self.png"></span>
-                            <span #factoryBtn (click)="factoryPop.show(factoryBtn)" *ngIf="shop.ShopType == 2"><img src="../../../../../assets/factory.png"></span>
+                            <span #normalBtn (click)="normalPop.show(normalBtn)" *ngIf="shop.shopType == 0"><img
+                                    src="../../../../../assets/normal.png"></span>
+                            <span #selftBtn (click)="selftPop.show(selftBtn)" *ngIf="shop.shopType == 1"><img
+                                    src="../../../../../assets/self.png"></span>
+                            <span #factoryBtn (click)="factoryPop.show(factoryBtn)" *ngIf="shop.shopType == 2"><img
+                                    src="../../../../../assets/factory.png"></span>
                         </ons-col>
-                        <ons-col *ngIf="shop.ExistsCoinParking" width="15%">
-                            <span #coinBtn (click)="coinPop.show(coinBtn)" ><img src="../../../../../assets/coin.png"></span>                            
-                        </ons-col>                        
-                        <ons-col *ngIf="shop.ExistsParking" width="10%">
-                            <span #parkingBtn (click)="parkingPop.show(parkingBtn)" ><img src="../../../../../assets/parking.png"></span>
+                        <ons-col *ngIf="shop.existsCoinParking" width="15%">
+                            <span #coinBtn (click)="coinPop.show(coinBtn)"><img
+                                    src="../../../../../assets/coin.png"></span>
+                        </ons-col>
+                        <ons-col *ngIf="shop.existsParking" width="10%">
+                            <span #parkingBtn (click)="parkingPop.show(parkingBtn)"><img
+                                    src="../../../../../assets/parking.png"></span>
                         </ons-col>
                         <ons-col width="5%" style="margin-top: 5px;">
-                            <i class="fas fa-map-marker-alt fa-lg"></i>
+                            <!--<i class="fas fa-map-marker-alt"></i>-->
                         </ons-col>
                     </ons-row>
                     <ons-row>
                         <ons-col>
-                            <label>時間:{{shop.StartTime.getHours()}}:{{shop.StartTime.getMinutes()}} - {{shop.EndTime.getHours()}}:{{shop.EndTime.getMinutes()}}</label>
+                            <label>時間:{{shop.startTime}} -{{shop.endTime}}</label>
                         </ons-col>
                         <ons-col>
                             <label style="font-size: 0.8em;">定休日:{{getHolidaysText(shop)}}</label>
                         </ons-col>
                     </ons-row>
                     <ons-row>
-                        <p>{{shop.Comment}}</p>                                            
-                    </ons-row>                    
+                        <p>{{shop.comment}}</p>
+                    </ons-row>
                 </ons-row>
-                
+
             </ons-list-item>
-            
+
         </ons-list>
     </div>
 

@@ -14,17 +14,104 @@ export class UdonShopService {
 
     constructor(private udonShopRepository: UdonShopRepository) {
         this.$udonShopOriginList = [];
+        this.$filteredUdonShopList = [];
         this.$uodonShopSubject = new BehaviorSubject<UdonShopModel[]>([]);
         this.$udonShopObserver = this.$uodonShopSubject.asObservable();
     }
 
     /**リストのオリジナル */
     private $udonShopOriginList: UdonShopModel[];
+    /**フィルター用のリスト */
+    private $filteredUdonShopList: UdonShopModel[];
     /**リストのサブジェクト この変数のnextが実行されて時、オブサーバで購買している値が変更される。 */
     private $uodonShopSubject: BehaviorSubject<UdonShopModel[]>;
-
     /**UdonShopのオブサーバ */
     public $udonShopObserver: Observable<UdonShopModel[]>;
+
+
+    /**5km圏内に店がある */
+    private _within5km: boolean;
+    public get within5km(): boolean { return this._within5km; }
+    /** */
+    public set within5km(value: boolean) {
+        this._within5km = value;
+    }
+
+
+    /**10km圏内に店がある */
+    private _within10km: boolean;
+    public get within10km(): boolean { return this._within10km; }
+    /** */
+    public set within10km(value: boolean) {
+        this._within10km = value;
+    }
+
+    /**営業時間内 */
+    private _businessCondition: boolean;
+    public get businessCondition(): boolean { return this._businessCondition; }
+    /** 
+     * trueならば現在営業時間内の店舗みでフィルターをかける。 
+     * falseならばフィルターを解除する。
+     * */
+    public set businessCondition(value: boolean) {
+        this._businessCondition = value;
+        if (this.businessCondition) {
+            let toDay = new Date();
+            this.filterBetweenTime(toDay.getHours(), toDay.getMinutes());
+        } else {
+            this.filterClear();
+        }
+    }
+
+
+    /**午前中 */
+    private _amCondition: boolean;
+    public get amCondition(): boolean { return this._amCondition; }
+    /**
+     * trueならば午前中に営業している店舗のみのフィルターをかける
+     * falseならばフィルターを解除する。
+     */
+    public set amCondition(value: boolean) {
+        this._amCondition = value;
+        if (this._amCondition) {
+            this.filterBetweenTime(13, 0);
+        } else {
+            this.filterClear();
+        }
+    }
+
+    /**午後 */
+    private _pmCondition: boolean;
+    public get pmCondition(): boolean { return this._pmCondition; }
+    /**
+     * trueならば午後に営業している店舗のみのフィルターをかける
+     * falseならばフィルターを解除する。
+     */
+    public set pmCondition(value: boolean) {
+        this._pmCondition = value;
+        if (this._pmCondition) {
+            this.filterBetweenTime(13, 0);
+        } else {
+            this.filterClear();
+        }
+    }
+
+    /**今日営業している店 */
+    private _notHoliday: boolean;
+    public get notHoliday(): boolean { return this._notHoliday; }
+    /**
+     * trueならば本日が営業日の店舗のみをフィルターする
+     * falseならばフィルターを解除する。
+     */
+    public set notHoliday(value: boolean) {
+        this._notHoliday = value;
+        if (this._notHoliday) {
+            let toDay = new Date();
+            this.filterBusinessDay(toDay.getDay());
+        } else {
+            this.filterClear();
+        }
+    }
 
 
     /**文字列からDateに変換 */
@@ -40,7 +127,8 @@ export class UdonShopService {
             this.udonShopRepository.fetchUdonShops(request).subscribe(response => {
                 if (response.returnCode === 0) {
                     this.$udonShopOriginList = response.udonShops;
-                    this.$uodonShopSubject.next(this.$udonShopOriginList);
+                    this.$filteredUdonShopList = this.$udonShopOriginList;
+                    this.$uodonShopSubject.next(this.$filteredUdonShopList);
                     resolve(response);
                 } else { reject(response); }
             }, error => {
@@ -54,15 +142,16 @@ export class UdonShopService {
      * @param targetHour 
      * @param targetMiniutes 
      */
-    filterBetweenTime(targetHour: number, targetMiniutes: number) {
-        let tmps: UdonShopModel[] = this.$udonShopOriginList.slice();
-        tmps = tmps.filter(shop => {
-            let startMin: number = this.str2Time(shop.startTime).getHours() * 60 + this.str2Time(shop.startTime).getMinutes();
-            let endMin: number = this.str2Time(shop.endTime).getHours() * 60 + this.str2Time(shop.endTime).getMinutes();
+    private filterBetweenTime(targetHour: number, targetMiniutes: number) {
+        this.$filteredUdonShopList = this.$filteredUdonShopList.filter(shop => {
+            let start = this.str2Time(shop.startTime);
+            let end = this.str2Time(shop.endTime);
+            let startMin: number = start.getHours() * 60 + start.getMinutes();
+            let endMin: number = end.getHours() * 60 + end.getMinutes();
             let target: number = targetHour * 60 + targetMiniutes;
             return (target > startMin) && (target < endMin);
         });
-        this.$uodonShopSubject.next(tmps);
+        this.$uodonShopSubject.next(this.$filteredUdonShopList);
     }
 
     /**
@@ -71,16 +160,24 @@ export class UdonShopService {
      * @param targetDayofWeek 
      * @returns 
      */
-    filterBusinessDay(targetDayofWeek: number) {
-        let tmps: UdonShopModel[] = this.$udonShopOriginList.slice();
-        tmps = tmps.filter(shop => {
+    private filterBusinessDay(targetDayofWeek: number) {
+        this.$filteredUdonShopList = this.$filteredUdonShopList.filter(shop => {
             let flag: boolean = true;
             shop.holidays.split('').forEach(holiday => {
                 if (holiday === targetDayofWeek.toString()) {
                     flag = false;
                 }
             });
+            return flag;
         });
-        this.$uodonShopSubject.next(tmps);
+        this.$uodonShopSubject.next(this.$filteredUdonShopList);
+    }
+
+    /**
+     * フィルターを解除する.
+     */
+    filterClear() {
+        this.$filteredUdonShopList = this.$udonShopOriginList.slice();
+        this.$uodonShopSubject.next(this.$filteredUdonShopList);
     }
 }

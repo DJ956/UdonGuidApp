@@ -43,9 +43,6 @@ export class RandomContent implements OnInit {
     try {
       let resuqest: UdonShopRequestModel = { UserId: '' };
       await this.udonShopService.fetchUdonShops(resuqest);
-      //今の時間で行っている店舗でフィルターをかける
-      let toDay = new Date();
-      this.udonShopService.filterBetweenTime(toDay.getHours(), toDay.getMinutes());
     } catch (e) {
       ons.notification.alert({ title: CommonApplicationMessage.ERROR_TITLE, messageHTML: e });
     }

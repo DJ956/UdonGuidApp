@@ -16,20 +16,20 @@
                             <h3><b>{{shop.shopName}}</b></h3>
                         </ons-col>
                         <ons-col width="15%">
-                            <span #normalBtn (click)="normalPop.show(normalBtn)" *ngIf="shop.shopType == 0"><img
-                                    src="../../../../../assets/normal.png"></span>
-                            <span #selftBtn (click)="selftPop.show(selftBtn)" *ngIf="shop.shopType == 1"><img
-                                    src="../../../../../assets/self.png"></span>
-                            <span #factoryBtn (click)="factoryPop.show(factoryBtn)" *ngIf="shop.shopType == 2"><img
-                                    src="../../../../../assets/factory.png"></span>
+                            <span #normalBtn (click)="normalPop.show(normalBtn)" *ngIf="shop.shopType == 0">
+                                <img src="../../../../../assets/normal.png"></span>
+                            <span #selftBtn (click)="selftPop.show(selftBtn)" *ngIf="shop.shopType == 1">
+                                <img src="../../../../../assets/self.png"></span>
+                            <span #factoryBtn (click)="factoryPop.show(factoryBtn)" *ngIf="shop.shopType == 2">
+                                <img src="../../../../../assets/factory.png"></span>
                         </ons-col>
                         <ons-col *ngIf="shop.existsCoinParking" width="15%">
-                            <span #coinBtn (click)="coinPop.show(coinBtn)"><img
-                                    src="../../../../../assets/coin.png"></span>
+                            <span #coinBtn (click)="coinPop.show(coinBtn)">
+                                <img src="../../../../../assets/coin.png"></span>
                         </ons-col>
                         <ons-col *ngIf="shop.existsParking" width="10%">
-                            <span #parkingBtn (click)="parkingPop.show(parkingBtn)"><img
-                                    src="../../../../../assets/parking.png"></span>
+                            <span #parkingBtn (click)="parkingPop.show(parkingBtn)">
+                                <img src="../../../../../assets/parking.png"></span>
                         </ons-col>
                         <ons-col width="5%" style="margin-top: 5px;">
                             <!--<i class="fas fa-map-marker-alt"></i>-->
@@ -47,7 +47,6 @@
                         <p>{{shop.comment}}</p>
                     </ons-row>
                 </ons-row>
-
             </ons-list-item>
 
         </ons-list>

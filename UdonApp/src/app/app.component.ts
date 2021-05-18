@@ -1,7 +1,7 @@
 import { Component, Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn:'root'
+  providedIn: 'root'
 })
 @Component({
   selector: 'app-root',

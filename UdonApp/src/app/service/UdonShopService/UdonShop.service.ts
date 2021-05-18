@@ -5,6 +5,8 @@ import { UdonShopRequestModel } from "src/app/model/request/UdonShopRequest.mode
 import { UdonShopModel } from "src/app/model/resource/UdonShop.model";
 import { UdonShopResponseModel } from "src/app/model/response/UdonShopResponse.model";
 import { UdonShopRepository } from "src/app/repository/UdonShopRepository/UdonShop.repository";
+import { FilterCondition } from "src/app/utils/FilterCondition";
+import { ShopTime } from "src/app/utils/ShopTime";
 
 
 @Injectable({
@@ -28,6 +30,10 @@ export class UdonShopService {
     /**UdonShopのオブサーバ */
     public $udonShopObserver: Observable<UdonShopModel[]>;
 
+    /**選択済み店舗情報 */
+    public selectedUdonShop: UdonShopModel;
+
+    private filterList: [];
 
     /**5km圏内に店がある */
     private _within5km: boolean;
@@ -57,40 +63,46 @@ export class UdonShopService {
         this._businessCondition = value;
         if (this.businessCondition) {
             let toDay = new Date();
-            this.filterBetweenTime(toDay.getHours(), toDay.getMinutes());
+            let shopTime = new ShopTime(`${toDay.getHours()}:${toDay.getMinutes()}`);
+            //this.filterList.push(this.filterWithBusinnessTime);
+            this.filterWithBusinnessTime(shopTime.getHours(), shopTime.getMinutes());
         } else {
             this.filterClear();
         }
     }
 
 
-    /**午前中 */
+
+    /**午前中  */
+    /*
     private _amCondition: boolean;
     public get amCondition(): boolean { return this._amCondition; }
     /**
-     * trueならば午前中に営業している店舗のみのフィルターをかける
+     * trueならば午前中(06:00~12:00)に営業している店舗のみのフィルターをかける
      * falseならばフィルターを解除する。
      */
+    /*
     public set amCondition(value: boolean) {
         this._amCondition = value;
         if (this._amCondition) {
-            this.filterBetweenTime(13, 0);
+            this.filterBetweenTime(6, 0, 12, 0);
         } else {
             this.filterClear();
         }
     }
+    */
 
     /**午後 */
     private _pmCondition: boolean;
     public get pmCondition(): boolean { return this._pmCondition; }
     /**
-     * trueならば午後に営業している店舗のみのフィルターをかける
+     * trueならば午後(13:00~24:00)に営業している店舗のみのフィルターをかける
      * falseならばフィルターを解除する。
      */
     public set pmCondition(value: boolean) {
         this._pmCondition = value;
         if (this._pmCondition) {
-            this.filterBetweenTime(13, 0);
+            this.filterBetweenTime(15, 0);
         } else {
             this.filterClear();
         }
@@ -127,6 +139,10 @@ export class UdonShopService {
             this.udonShopRepository.fetchUdonShops(request).subscribe(response => {
                 if (response.returnCode === 0) {
                     this.$udonShopOriginList = response.udonShops;
+                    this.$udonShopOriginList.forEach(udon => {
+                        udon.startTime = new ShopTime(udon.startTime).getDisplayTime();
+                        udon.endTime = new ShopTime(udon.endTime).getDisplayTime();
+                    });
                     this.$filteredUdonShopList = this.$udonShopOriginList;
                     this.$uodonShopSubject.next(this.$filteredUdonShopList);
                     resolve(response);
@@ -142,10 +158,26 @@ export class UdonShopService {
      * @param targetHour 
      * @param targetMiniutes 
      */
-    private filterBetweenTime(targetHour: number, targetMiniutes: number) {
+    private filterBetweenTime(targetH: number, targetM: number) {
         this.$filteredUdonShopList = this.$filteredUdonShopList.filter(shop => {
-            let start = this.str2Time(shop.startTime);
-            let end = this.str2Time(shop.endTime);
+            let end = new ShopTime(shop.endTime);
+            if (end.isUndefined()) { return false; }
+
+            let endMin: number = end.getHours() * 60 + end.getMinutes();
+
+            let targetEnd: number = targetH * 60 + targetM;
+            return targetEnd < endMin;
+        });
+        this.$uodonShopSubject.next(this.$filteredUdonShopList);
+    }
+
+    /**
+     * 
+     */
+    private filterWithBusinnessTime(targetHour: number, targetMiniutes: number) {
+        this.$filteredUdonShopList = this.$filteredUdonShopList.filter(shop => {
+            let start = new ShopTime(shop.startTime);
+            let end = new ShopTime(shop.endTime);
             let startMin: number = start.getHours() * 60 + start.getMinutes();
             let endMin: number = end.getHours() * 60 + end.getMinutes();
             let target: number = targetHour * 60 + targetMiniutes;

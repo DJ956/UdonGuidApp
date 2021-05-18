@@ -37,7 +37,7 @@ export class FilterContent implements OnInit {
 
     onChangeWithin10km(checked: boolean) { this.udonShopService.within10km = checked; }
 
-    onChangeAMCondition(checked: boolean) { this.udonShopService.amCondition = checked; }
+    //onChangeAMCondition(checked: boolean) { this.udonShopService.amCondition = checked; }
 
     onChangePMCondition(checked: boolean) { this.udonShopService.pmCondition = checked; }
 

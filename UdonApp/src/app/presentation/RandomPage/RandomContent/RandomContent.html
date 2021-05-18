@@ -10,85 +10,15 @@
             </ons-list-header>
 
             <ons-list-item modifier="longdivider" *ngFor="let shop of $udonShops; index as i">
+                <app-ShopInfoComponent (clickShopNameEvent)="onClickMove2ShopCard(shop)" [shop]="shop">
+                </app-ShopInfoComponent>
                 <ons-row>
-                    <ons-row>
-                        <ons-col width="30%">
-                            <h3><b>{{shop.shopName}}</b></h3>
-                        </ons-col>
-                        <ons-col width="15%">
-                            <span #normalBtn (click)="normalPop.show(normalBtn)" *ngIf="shop.shopType == 0">
-                                <img src="../../../../../assets/normal.png"></span>
-                            <span #selftBtn (click)="selftPop.show(selftBtn)" *ngIf="shop.shopType == 1">
-                                <img src="../../../../../assets/self.png"></span>
-                            <span #factoryBtn (click)="factoryPop.show(factoryBtn)" *ngIf="shop.shopType == 2">
-                                <img src="../../../../../assets/factory.png"></span>
-                        </ons-col>
-                        <ons-col *ngIf="shop.existsCoinParking" width="15%">
-                            <span #coinBtn (click)="coinPop.show(coinBtn)">
-                                <img src="../../../../../assets/coin.png"></span>
-                        </ons-col>
-                        <ons-col *ngIf="shop.existsParking" width="10%">
-                            <span #parkingBtn (click)="parkingPop.show(parkingBtn)">
-                                <img src="../../../../../assets/parking.png"></span>
-                        </ons-col>
-                        <ons-col width="5%" style="margin-top: 5px;">
-                            <!--<i class="fas fa-map-marker-alt"></i>-->
-                        </ons-col>
-                    </ons-row>
-                    <ons-row>
-                        <ons-col>
-                            <label>時間:{{shop.startTime}} -{{shop.endTime}}</label>
-                        </ons-col>
-                        <ons-col>
-                            <label style="font-size: 0.8em;">定休日:{{getHolidaysText(shop)}}</label>
-                        </ons-col>
-                    </ons-row>
-                    <ons-row>
-                        <p>{{shop.comment}}</p>
-                    </ons-row>
+                    <p>{{shop.comment}}</p>
                 </ons-row>
+
             </ons-list-item>
 
         </ons-list>
     </div>
 
 </ons-page>
-
-<!--コインパーキングポップおーば-->
-<ons-popover #coinPop direction="up down" cancelable="true">
-    <div class="pop">
-        <h1>コインパーキングあり</h1>
-    </div>
-</ons-popover>
-
-<!--駐車場有ポップおーば-->
-<ons-popover #parkingPop direction="up down" cancelable="true">
-    <div class="pop">
-        <h1>駐車場有</h1>
-    </div>
-</ons-popover>
-
-<!--一般点ポップオーバー-->
-<ons-popover #normalPop direction="up down" cancelable="true">
-    <div class="pop">
-        <p>一般店</p>
-        <p>普通の店舗のうどん屋</p>
-        <!--p class="left"><i class="far fa-times-circle" (click)="normalPop.hide()" modifier="light">閉じる</i></p>-->
-    </div>
-</ons-popover>
-
-<!--セルフポップおーば-->
-<ons-popover #selftPop direction="up down" cancelable="true">
-    <div class="pop">
-        <p>セルフ店</p>
-        <p>食器の返却などを客自身が行う店舗</p>
-    </div>
-</ons-popover>
-
-<!--製麺所ポップおーば-->
-<ons-popover #factoryPop direction="up down" cancelable="true">
-    <div class="pop">
-        <p>製麺所</p>
-        <p>うどんの麺の卸しをするのが本業の製麺所が、お客様の希望でうどんを提供するようになったお店</p>
-    </div>
-</ons-popover>

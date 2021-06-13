@@ -1,4 +1,4 @@
-import { BaseRequestModel } from "./BaseRequest.model";
+import { BaseRequestModel } from "../BaseRequest.model";
 
 /**
  * ログアウトリクエストモデル

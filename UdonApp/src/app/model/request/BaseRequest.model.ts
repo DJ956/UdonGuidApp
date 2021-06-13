@@ -1,3 +1,3 @@
 export interface BaseRequestModel {
-    userId: string;
+    userId: number;
 }

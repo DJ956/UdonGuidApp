@@ -1,7 +1,7 @@
 <ons-page>
     <ons-toolbar>
         <div class="left">
-            <ons-toolbar-button routerLink="..">
+            <ons-toolbar-button routerLink="/">
                 < 戻る</ons-toolbar-button>
         </div>
         <div class="center">うどんガイドブック</div>
@@ -9,11 +9,38 @@
     </ons-toolbar>
     <div class="background"></div>
     <div class="content">
-        <app-ShopCard *ngIf="this.udonShop !== undefined" [shop]="this.udonShop"></app-ShopCard>
+
+        <ons-row>
+            <app-ShopCard class="shop" *ngIf="this.udonShop !== undefined" [shop]="this.udonShop"></app-ShopCard>
+        </ons-row>
+
+        <!-- コメント -->
+        <ng-container *ngIf="this.shopCommentList !== undefined">
+            <ons-list modifier="inset">
+                <ons-list-header>
+                    <span>コメント一覧</span>
+                </ons-list-header>
+                <ons-list-item modifier="longdivider" *ngFor="let shopComment of this.shopCommentList">
+                    <ons-card style="width: 100%;">
+                        <div class="title">
+                            投稿者:{{shopComment.userId}}
+                        </div>
+                        <div class="content">
+                            <p>タグ:{{shopComment.tag}}</p>
+                            <p>{{shopComment.comment}}</p>
+                        </div>
+                    </ons-card>
+                </ons-list-item>
+            </ons-list>
+
+        </ng-container>
 
 
-        <ons-fab *ngIf="this.isLogined" modifier="mini" (click)="onClickAddComment()">
+
+        <ons-fab modifier="mini" (click)="onClickShoModal()">
             <ons-icon icon="fa-plus"></ons-icon>
         </ons-fab>
     </div>
 </ons-page>
+
+<!-- コメント追加モーダル -->

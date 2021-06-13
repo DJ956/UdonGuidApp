@@ -1,4 +1,4 @@
-import { BaseResponseModel } from "./BaseResponse.model";
+import { BaseResponseModel } from "../BaseResponse.model";
 
 /**
  * ユーザログアウトレスポンセモデル

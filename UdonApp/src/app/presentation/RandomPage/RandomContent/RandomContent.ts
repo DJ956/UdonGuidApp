@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { CommonApplicationMessage } from 'src/app/consts/CommonApplicationMessage';
 import { CodeMasterRequestModel } from 'src/app/model/request/CodeMasterRequest.model';
 import { UdonShopRequestModel } from 'src/app/model/request/UdonShopRequest.model';
-import { UserLogInRequestModel } from 'src/app/model/request/UserLogInRequest.model';
+import { UserLogInRequestModel } from 'src/app/model/request/Auth/UserLogInRequest.model';
 import { CodeMasterModel } from 'src/app/model/resource/CodeMaster.model';
 import { UdonShopModel } from 'src/app/model/resource/UdonShop.model';
 import { AuthService } from 'src/app/service/AuthService/Auth.service';
@@ -19,7 +19,7 @@ import { UdonShopService } from 'src/app/service/UdonShopService/UdonShop.servic
 @Component({
   selector: 'app-RandomContent',
   templateUrl: './RandomContent.html',
-  styleUrls: ['./RandomContent.css']
+  styleUrls: ['./RandomContent.css', '../../../app.component.css']
 })
 export class RandomContent implements OnInit {
 
@@ -46,7 +46,7 @@ export class RandomContent implements OnInit {
 
     //店舗取得
     try {
-      let resuqest: UdonShopRequestModel = { userId: '' };
+      let resuqest: UdonShopRequestModel = { userId: 1 };
       await this.udonShopService.fetchUdonShops(resuqest);
     } catch (e) {
       ons.notification.alert({ title: CommonApplicationMessage.ERROR_TITLE, messageHTML: e });
@@ -54,7 +54,7 @@ export class RandomContent implements OnInit {
 
     try {
       let request: CodeMasterRequestModel = {
-        userId: '',
+        userId: 1,
         CategoryCd: CodeMasterService.HOLIDAY
       };
       await this.codeMasterService.getCodeMasters(request);

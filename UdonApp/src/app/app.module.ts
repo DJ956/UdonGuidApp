@@ -27,6 +27,8 @@ import { AddCommentContent } from './presentation/AddCommentPage/AddCommentConte
 import { AddCommentPage } from './presentation/AddCommentPage/AddCommentPage/AddCommentPage.component';
 import { AuthRepository } from './repository/AuthRepository/Auth.repository';
 import { AuthImplRepository } from './infra/repository/AuthRepository/AuthImpl.repository';
+import { ShopCommentsRepository } from './repository/ShopCommentsRepository/ShopComments.repository';
+import { ShopCommentsImplRepository } from './infra/repository/ShopCommentsRepository/ShopCommentsImpl.repository';
 
 @NgModule({
   declarations: [
@@ -68,6 +70,7 @@ import { AuthImplRepository } from './infra/repository/AuthRepository/AuthImpl.r
     { provide: UdonShopRepository, useClass: UdonShopImplRepository },
     { provide: CodeMasterRepository, useClass: CodeMasterImplRepository },
     { provide: AuthRepository, useClass: AuthImplRepository },
+    { provide: ShopCommentsRepository, useClass: ShopCommentsImplRepository },
   ],
   bootstrap: [AppComponent]
 })

@@ -3,12 +3,13 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { APIUrl } from "src/app/consts/APIUrl";
-import { UserLogInRequestModel } from "src/app/model/request/UserLogInRequest.model";
-import { UserLogOutRequestModel } from "src/app/model/request/UserLogOutRequest.model";
-import { UserRegistryRequestModel } from "src/app/model/request/UserRegistryRequest.model";
-import { UserLogInResponseModel } from "src/app/model/response/UserLogInResponse.model";
-import { UserLogOutResponseModel } from "src/app/model/response/UserLogOutResponse.model";
-import { UserRegistryResponseModel } from "src/app/model/response/UserRegistryResponse.model";
+import { UserLogInRequestModel } from "src/app/model/request/Auth/UserLogInRequest.model";
+import { UserLogOutRequestModel } from "src/app/model/request/Auth/UserLogOutRequest.model";
+import { UserRegistryRequestModel } from "src/app/model/request/Auth/UserRegistryRequest.model";
+import { UserLogInResponseModel } from "src/app/model/response/Auth/UserLogInResponse.model";
+import { UserLogOutResponseModel } from "src/app/model/response/Auth/UserLogOutResponse.model";
+import { UserRegistryResponseModel } from "src/app/model/response/Auth/UserRegistryResponse.model";
+
 import { AuthRepository } from "src/app/repository/AuthRepository/Auth.repository";
 
 @Injectable({

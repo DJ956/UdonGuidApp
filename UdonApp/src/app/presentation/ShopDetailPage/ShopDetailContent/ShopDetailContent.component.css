@@ -4,3 +4,15 @@ ons-fab{
     right: 20px;
     z-index: 999;
 }
+
+.modal{
+    text-align: center;
+    opacity: 0.8;
+    background-color: gray;
+}
+
+.modal-input{
+    margin-top: 10px;
+    border-radius: 5px;
+    background-color: white;
+}

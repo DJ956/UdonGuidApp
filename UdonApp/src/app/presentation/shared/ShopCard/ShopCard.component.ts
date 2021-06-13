@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { UdonShopModel } from "src/app/model/resource/UdonShop.model";
+import { UdonShopService } from "src/app/service/UdonShopService/UdonShop.service";
 
 
 @Component({
@@ -14,10 +15,10 @@ export class ShopCard implements OnInit {
     @Input()
     shop: UdonShopModel
 
-    constructor() {
+    constructor(private udonShopService: UdonShopService) {
     }
 
-    async ngOnInit() {
+    ngOnInit() {
     }
 
 }

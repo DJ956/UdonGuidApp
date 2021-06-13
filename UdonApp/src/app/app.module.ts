@@ -13,8 +13,6 @@ import { UdonShopRepository } from './repository/UdonShopRepository/UdonShop.rep
 import { MockUdonShopRepository } from './infra/repository/UdonShopRepository/MockUdonShop.repository';
 import { FilterContent } from './presentation/HomePage/FilterPage/FilterContent/FilterContent';
 import { FilterPage } from './presentation/HomePage/FilterPage/FilterPage/FilterPage';
-import { SearchPage } from './presentation/SearchPage/SearchPage/SearchPage';
-import { SearchContent } from './presentation/SearchPage/SearchContent/SearchContent';
 import { UdonShopImplRepository } from './infra/repository/UdonShopRepository/UdonShopImpl.repository';
 import { CodeMasterRepository } from './repository/CodeMasterRepository/CodeMaster.repository';
 import { CodeMasterImplRepository } from './infra/repository/CodeMasterRepository/CodeMasterImpl.repository';
@@ -24,18 +22,18 @@ import { ShopCard } from './presentation/shared/ShopCard/ShopCard.component';
 import { LoadingService } from './service/LoadingService/Loading.service';
 import { LoadingInterceptor } from './interceptors/LoadingInterceptor/Loading.interceptor';
 import { ShopInfo } from './presentation/shared/ShopInfo/ShopInfo.component';
+import { LoadingComponent } from './presentation/shared/Loading/Loading.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoadingComponent,
     HomeContent,
     HomePage,
     RandomPage,
     RandomContent,
     FilterContent,
     FilterPage,
-    SearchPage,
-    SearchContent,
     ShopDetailContent,
     ShopDetailPage,
     ShopInfo,
@@ -50,7 +48,6 @@ import { ShopInfo } from './presentation/shared/ShopInfo/ShopInfo.component';
   entryComponents: [
     RandomPage,
     FilterPage,
-    SearchPage,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

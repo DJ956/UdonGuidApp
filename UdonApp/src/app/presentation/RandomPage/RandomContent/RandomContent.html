@@ -2,23 +2,41 @@
     <div class="background"></div>
     <div class="content">
         <br>
-        <ons-list modifier="inset">
-            <ons-list-header>
-                <a style="margin-right: 5px;">うどん店</a>
-                <span class="notification notification--material">{{$udonShops.length}}</span>
-                <span>件</span>
-            </ons-list-header>
 
-            <ons-list-item modifier="longdivider" *ngFor="let shop of $udonShops; index as i">
-                <app-ShopInfoComponent (clickShopNameEvent)="onClickMove2ShopCard(shop)" [shop]="shop">
-                </app-ShopInfoComponent>
-                <ons-row>
-                    <p>{{shop.comment}}</p>
-                </ons-row>
+        <ons-row>
+            <ons-row>
+                <!-- ヘッダー -->
+                <ons-col>
+                    <ons-input aria-placeholder="検索"></ons-input>
+                </ons-col>
+                <ons-col></ons-col>
+                <ons-col>
+                    <ons-button>検索</ons-button>
+                </ons-col>
+            </ons-row>
 
-            </ons-list-item>
+            <ons-row>
+                <!-- リスト -->
+                <ons-list modifier="inset">
+                    <ons-list-header>
+                        <a style="margin-right: 5px;">うどん店</a>
+                        <span class="notification notification--material">{{$udonShops.length}}</span>
+                        <span>件</span>
+                    </ons-list-header>
 
-        </ons-list>
+                    <ons-list-item modifier="longdivider" *ngFor="let shop of udonShopObserver | async; index as i">
+                        <div class="shop">
+                            <app-ShopInfoComponent (clickShopNameEvent)="onClickMove2ShopCard(shop)" [shop]="shop">
+                            </app-ShopInfoComponent>
+                            <ons-row>
+                                <p>{{shop.comment}}</p>
+                            </ons-row>
+                        </div>
+                    </ons-list-item>
+
+                </ons-list>
+            </ons-row>
+        </ons-row>
     </div>
 
 </ons-page>

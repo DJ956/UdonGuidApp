@@ -22,7 +22,7 @@ export class ShopDetailContent implements OnInit {
     /**表示させる店舗情報 */
     udonShop: UdonShopModel;
 
-    ngOnInit(): void {
+    ngOnInit() {
     }
 
 }

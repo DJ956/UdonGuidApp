@@ -1,6 +1,9 @@
 import { Component, Injectable, OnInit } from "@angular/core";
 import { LoadingService } from "src/app/service/LoadingService/Loading.service";
 
+@Injectable({
+    providedIn: 'root'
+})
 @Component({
     selector: 'app-Loading',
     templateUrl: './Loading.component.html',

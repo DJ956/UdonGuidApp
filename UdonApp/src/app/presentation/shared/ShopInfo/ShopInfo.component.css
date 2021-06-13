@@ -1,4 +1,9 @@
-.pop{
+.pop{    
     text-align: center;
-    opacity: 0.7;
+    opacity: 0.7;    
+}
+
+.title{
+    border-radius: 10px;
+    background-color: rgb(243, 224, 199);
 }

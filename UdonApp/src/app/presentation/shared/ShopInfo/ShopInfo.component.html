@@ -1,7 +1,9 @@
-<ons-row>
+<ons-row class="shop">
     <ons-row>
         <ons-col width="50%">
-            <h3 (click)="onClickShopName()"><b>{{shop.shopName}}</b></h3>
+            <h3 (click)="onClickShopName()">
+                <span class="title"><b>{{shop.shopName}}</b></span>
+            </h3>
         </ons-col>
         <ons-col width="15%">
             <span #normalBtn (click)="normalPop.show(normalBtn)" *ngIf="shop.shopType == 0">
@@ -29,7 +31,7 @@
             <label *ngIf="shop.startTime === '不明'">時間:不明</label>
         </ons-col>
         <ons-col>
-            <label style="font-size: 0.8em;">定休日:{{getHolidaysText(shop)}}</label>
+            <label style="font-size: 0.8em;">定休日:{{this.displayHolidayText}}</label>
         </ons-col>
     </ons-row>
 </ons-row>

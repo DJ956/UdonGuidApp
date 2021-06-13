@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import * as ons from 'onsenui';
 import { Observable } from 'rxjs';
 import { CommonApplicationMessage } from 'src/app/consts/CommonApplicationMessage';
+import { CodeMasterRequestModel } from 'src/app/model/request/CodeMasterRequest.model';
 import { UdonShopRequestModel } from 'src/app/model/request/UdonShopRequest.model';
 import { CodeMasterModel } from 'src/app/model/resource/CodeMaster.model';
 import { UdonShopModel } from 'src/app/model/resource/UdonShop.model';
@@ -23,7 +24,13 @@ export class RandomContent implements OnInit {
   constructor(
     private router: Router,
     private codeMasterService: CodeMasterService,
-    private udonShopService: UdonShopService) { }
+    private udonShopService: UdonShopService) {
+    //購買設定
+    this.udonShopObserver = this.udonShopService.$udonShopObserver;
+    this.udonShopObserver.subscribe(udonShops => {
+      this.$udonShops = udonShops;
+    });
+  }
 
   public $udonShops: UdonShopModel[];
   public $holidays: CodeMasterModel[];
@@ -34,12 +41,6 @@ export class RandomContent implements OnInit {
     this.$udonShops = [];
     this.$holidays = [];
 
-    //購買設定
-    this.udonShopObserver = this.udonShopService.$udonShopObserver;
-    this.udonShopObserver.subscribe(udonShops => {
-      this.$udonShops = udonShops;
-    });
-
     //店舗取得
     try {
       let resuqest: UdonShopRequestModel = { UserId: '' };
@@ -49,7 +50,12 @@ export class RandomContent implements OnInit {
     }
 
     try {
-      this.$holidays = this.codeMasterService.Holidays;
+      let request: CodeMasterRequestModel = {
+        UserId: '',
+        CategoryCd: CodeMasterService.HOLIDAY
+      };
+      await this.codeMasterService.getCodeMasters(request);
+      console.log("fetch");
     } catch (e) {
       ons.notification.alert({ title: CommonApplicationMessage.ERROR_TITLE, messageHTML: e });
     }

@@ -1,4 +1,5 @@
-import { HostListener, Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
+import { BehaviorSubject, Observable } from "rxjs";
 import { CommonApplicationMessage } from "src/app/consts/CommonApplicationMessage";
 import { CodeMasterRequestModel } from "src/app/model/request/CodeMasterRequest.model";
 import { CodeMasterModel } from "src/app/model/resource/CodeMaster.model";
@@ -10,72 +11,38 @@ import { CodeMasterRepository } from "src/app/repository/CodeMasterRepository/Co
 })
 export class CodeMasterService {
 
-    constructor(private codeMasterRepository: CodeMasterRepository) {
-        this.holidays = [];
-    }
 
     public static readonly HOLIDAY: string = "Holiday";
     public static readonly RECOMMEND: string = "Recommend";
 
+    private $holidaysOrign: CodeMasterModel[];
+    private $holidaysSubject: BehaviorSubject<CodeMasterModel[]>;
 
-    private holidays: CodeMasterModel[];
     /**
-     * 休日コードマスタを取得する。
-     * 今まで一度も取得されていなかった場合、サーバへ通信し取得する
+     * CodeMasterの休日オブサーバ
      */
-    public get Holidays(): CodeMasterModel[] {
-        if (this.holidays.length > 0) { return this.holidays; }
+    public $holidayObserver: Observable<CodeMasterModel[]>;
 
-        try {
-            const request: CodeMasterRequestModel = {
-                UserId: '',
-                CategoryCd: CodeMasterService.HOLIDAY
-            };
-            this.getCodeMasters(request).then(response => {
-                this.holidays = response.codeMasters;
-            });
-        } catch (e) {
-            throw e
-        }
-        return this.holidays;
-    };
-
-
-    private recommends: CodeMasterModel[];
-    /**
-     * おすすめコードマスタを取得する。
-     * 今まで一度も取得されていなかった場合、サーバへ通信し取得する
-     */
-    public get Recommends(): CodeMasterModel[] {
-        if (this.recommends.length > 0) { return this.recommends; }
-
-        try {
-            const request: CodeMasterRequestModel = {
-                UserId: '',
-                CategoryCd: CodeMasterService.RECOMMEND
-            };
-            this.getCodeMasters(request).then(response => {
-                this.recommends = response.codeMasters;
-            });
-        } catch (e) {
-            throw e
-        }
-        return this.recommends;
+    constructor(private codeMasterRepository: CodeMasterRepository) {
+        this.$holidaysOrign = [];
+        this.$holidaysSubject = new BehaviorSubject<CodeMasterModel[]>([]);
+        this.$holidayObserver = this.$holidaysSubject.asObservable();
     }
 
-    private getCodeMasters(request: CodeMasterRequestModel): Promise<CodeMasterResponseModel> {
+
+    public getCodeMasters(request: CodeMasterRequestModel): Promise<CodeMasterResponseModel> {
         return new Promise((resolve, rejects) => {
-            this.codeMasterRepository.fetchCodeMaster(request).subscribe({
-                next(response) {
-                    if (response.returnCode === 0) {
-                        resolve(response);
-                    } else {
-                        rejects(response.message);
-                    }
-                },
-                error(e) {
-                    rejects(CommonApplicationMessage.UNREACHBLE_SERVER + "<br>" + CodeMasterService.name);
+            this.codeMasterRepository.fetchCodeMaster(request).subscribe(response => {
+                if (response.returnCode === 0) {
+                    this.$holidaysOrign = response.codeMasters;
+                    this.$holidaysSubject.next(this.$holidaysOrign);
+                    console.log("next");
+                    resolve(response);
+                } else {
+                    rejects(response.message);
                 }
+            }, error => {
+                rejects(CommonApplicationMessage.UNREACHBLE_SERVER + "<br>" + CodeMasterService.name);
             });
         });
     }

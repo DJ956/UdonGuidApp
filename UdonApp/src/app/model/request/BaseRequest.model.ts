@@ -1,3 +1,3 @@
-export interface BaseRequestModel{
-    UserId:string;
+export interface BaseRequestModel {
+    userId: string;
 }

@@ -23,6 +23,10 @@ import { LoadingService } from './service/LoadingService/Loading.service';
 import { LoadingInterceptor } from './interceptors/LoadingInterceptor/Loading.interceptor';
 import { ShopInfo } from './presentation/shared/ShopInfo/ShopInfo.component';
 import { LoadingComponent } from './presentation/shared/Loading/Loading.component';
+import { AddCommentContent } from './presentation/AddCommentPage/AddCommentContent/AddCommentContent.component';
+import { AddCommentPage } from './presentation/AddCommentPage/AddCommentPage/AddCommentPage.component';
+import { AuthRepository } from './repository/AuthRepository/Auth.repository';
+import { AuthImplRepository } from './infra/repository/AuthRepository/AuthImpl.repository';
 
 @NgModule({
   declarations: [
@@ -34,6 +38,8 @@ import { LoadingComponent } from './presentation/shared/Loading/Loading.componen
     RandomContent,
     FilterContent,
     FilterPage,
+    AddCommentPage,
+    AddCommentContent,
     ShopDetailContent,
     ShopDetailPage,
     ShopInfo,
@@ -61,7 +67,7 @@ import { LoadingComponent } from './presentation/shared/Loading/Loading.componen
     },
     { provide: UdonShopRepository, useClass: UdonShopImplRepository },
     { provide: CodeMasterRepository, useClass: CodeMasterImplRepository },
-
+    { provide: AuthRepository, useClass: AuthImplRepository },
   ],
   bootstrap: [AppComponent]
 })

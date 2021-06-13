@@ -17,12 +17,23 @@ export class ShopDetailContent implements OnInit {
 
     constructor(private udonShopService: UdonShopService) {
         this.udonShop = this.udonShopService.selectedUdonShop;
+        this.isLogined = true;
     }
+
+    /**true:ログイン済み, false:ログインしていない */
+    isLogined: boolean;
 
     /**表示させる店舗情報 */
     udonShop: UdonShopModel;
 
     ngOnInit() {
+    }
+
+    /**
+     * 店舗に対してコメントを追加する
+     */
+    onClickAddComment() {
+
     }
 
 }

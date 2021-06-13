@@ -10,5 +10,10 @@
     <div class="background"></div>
     <div class="content">
         <app-ShopCard *ngIf="this.udonShop !== undefined" [shop]="this.udonShop"></app-ShopCard>
+
+
+        <ons-fab *ngIf="this.isLogined" modifier="mini" (click)="onClickAddComment()">
+            <ons-icon icon="fa-plus"></ons-icon>
+        </ons-fab>
     </div>
 </ons-page>

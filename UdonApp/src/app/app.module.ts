@@ -29,6 +29,8 @@ import { AuthRepository } from './repository/AuthRepository/Auth.repository';
 import { AuthImplRepository } from './infra/repository/AuthRepository/AuthImpl.repository';
 import { ShopCommentsRepository } from './repository/ShopCommentsRepository/ShopComments.repository';
 import { ShopCommentsImplRepository } from './infra/repository/ShopCommentsRepository/ShopCommentsImpl.repository';
+import { LogInContent } from './presentation/LogInPage/LogInContent/LogInContent.component';
+import { LogInPage } from './presentation/LogInPage/LogInPage/LogInPage.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import { ShopCommentsImplRepository } from './infra/repository/ShopCommentsRepos
     ShopDetailPage,
     ShopInfo,
     ShopCard,
+    LogInContent,
+    LogInPage,
   ],
   imports: [
     BrowserModule,

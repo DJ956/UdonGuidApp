@@ -1,0 +1,76 @@
+<ons-page>
+    <div class="background"></div>
+    <div class="content" class="normal-page">
+        <div style="text-align: center; margin-top: 30px;">
+            <p>
+                <ons-input [value]="this.userName" (input)="this.userName = $event.target.value" id="username"
+                    modifier="underbar" placeholder="ユーザ名" float>
+                </ons-input>
+            </p>
+            <p>
+                <ons-input [value]="this.password" (input)="this.password = $event.target.value" id="password"
+                    modifier="underbar" type="password" placeholder="パスワード" float required>
+                </ons-input>
+            </p>
+
+            <p style="margin-top: 30px;">
+                <ons-button *ngIf="this.userName.length >= 3 && this.password.length > 0" (click)="onClicklogin()">ログイン
+                </ons-button>
+
+                <ons-button *ngIf="this.userName.length < 3 || this.password.length === 0" disabled>ログイン
+                </ons-button>
+            </p>
+
+            <!-- 新規登録 -->
+            <p style="margin-top: 30px;">
+                <ons-button modifier="outline" (click)="onClickShowModal()">新規登録</ons-button>
+            </p>
+        </div>
+    </div>
+</ons-page>
+
+<!-- 新規作成用のモーダル -->
+<ons-modal #modal>
+    <div class="modal-content">
+        <ons-row>
+            <ons-col>
+                <ons-fab (click)="onClickCloseModal()">
+                    <ons-icon icon="fa-close"></ons-icon>
+                </ons-fab>
+            </ons-col>
+
+            <ons-col>
+                <ons-button *ngIf="!this.isValid()" disabled>新規登録 </ons-button>
+                <ons-button *ngIf="this.isValid()" (click)="onClickregistryUser()">新規登録
+                </ons-button>
+            </ons-col>
+        </ons-row>
+
+
+        <div style="text-align: center; margin-top: 30px;">
+            <p>
+                <ons-input modifier="material" [value]="this.newUserName"
+                    (input)="this.newUserName = $event.target.value" id="username" placeholder="ユーザ名(3文字以上)" float>
+                </ons-input>
+                <span style="color: red;">必須</span>
+            </p>
+            <br>
+            <p>
+                <ons-input modifier="material" [value]="this.newPassword"
+                    (input)="this.newPassword = $event.target.value" id="password" type="password" placeholder="パスワード"
+                    float required>
+                </ons-input>
+                <span style="color: red;">必須</span>
+            </p>
+            <p>
+                <ons-input modifier="material" [value]="this.repassword" (input)="this.repassword = $event.target.value"
+                    id="repassword" type="password" placeholder="確認パスワード" float required>
+                </ons-input>
+                <span style="color: red;">必須</span>
+                <br>
+                <span style="color: red;" *ngIf="this.newPassword !== this.repassword">パスワードが一致しません</span>
+            </p>
+        </div>
+    </div>
+
+</ons-modal>

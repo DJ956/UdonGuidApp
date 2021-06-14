@@ -1,0 +1,16 @@
+.modal-content{
+    padding-top: 30px;
+    border-radius: 10px;
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    text-align: center;
+    width:50%;
+    height: 50%;
+    background-color: white;
+    opacity: 0.85;
+}
+
+.modal-input{
+    margin-top: 10px;
+}

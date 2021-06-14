@@ -1,4 +1,5 @@
 import { Component, ElementRef, Injectable, OnInit, ViewChild } from "@angular/core";
+import { Router } from "@angular/router";
 import * as ons from "onsenui";
 import { Observable } from "rxjs";
 import { CommonApplicationMessage } from "src/app/consts/CommonApplicationMessage";
@@ -30,14 +31,11 @@ export class ShopDetailContent implements OnInit {
     shopCommentList: ShopCommentModel[];
 
 
-
-    /**true:ログイン済み, false:ログインしていない */
-    isLogined: boolean;
-
     /**表示させる店舗情報 */
     udonShop: UdonShopModel;
 
     constructor(
+        private router: Router,
         private authService: AuthService,
         private shopCommentService: ShopCommentsService,
         private udonShopService: UdonShopService) {
@@ -50,8 +48,6 @@ export class ShopDetailContent implements OnInit {
         this.shopCommentObserver.subscribe((response) => {
             this.shopCommentList = response;
         });
-        // this.isLogined = this.authService.isLogIn();
-        this.isLogined = true;
     }
 
 
@@ -72,7 +68,16 @@ export class ShopDetailContent implements OnInit {
         }
     }
 
-    onClickShoModal() { this.modal.nativeElement.show(); }
+    /**
+     * コメント追加モーダルを開く
+     * ログインしていなければログイン画面へ遷移する。
+     */
+    onClickShowModal() {
+        if (!this.authService.isLogIn()) {
+            this.router.navigate(['login'], { queryParams: { link: 'shopDetail' } });
+        }
+        this.modal.nativeElement.show();
+    }
 
     onClickHideModal() {
         this.modal.nativeElement.hide();

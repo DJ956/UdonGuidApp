@@ -39,7 +39,7 @@ export class AuthService {
                     if (response.returnCode === 0 && response.message === '') {
                         this._logInInfo = {
                             userId: response.userId,
-                            userName: request.userName,
+                            userName: request.UserName,
                             accessToken: response.accsessToken
                         };
                         resolve(response);

@@ -3,8 +3,8 @@
  */
 export interface UserLogInRequestModel {
     /**ユーザ名 */
-    userName: string;
+    UserName: string;
 
     /**パスワード */
-    password: string;
+    Password: string;
 }

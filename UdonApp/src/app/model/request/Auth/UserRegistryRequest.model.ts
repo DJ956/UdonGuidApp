@@ -1,12 +1,10 @@
-import { BaseRequestModel } from "../BaseRequest.model";
-
 /**
  * ユーザ登録リクエストモデル
  */
-export interface UserRegistryRequestModel extends BaseRequestModel {
+export interface UserRegistryRequestModel {
     /**登録ユーザ名 */
-    userName: string;
+    UserName: string;
 
     /**パスワード */
-    password: string;
+    Password: string;
 }

@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
 import { CommonApplicationMessage } from 'src/app/consts/CommonApplicationMessage';
 import { CodeMasterRequestModel } from 'src/app/model/request/CodeMasterRequest.model';
 import { UdonShopRequestModel } from 'src/app/model/request/UdonShopRequest.model';
-import { UserLogInRequestModel } from 'src/app/model/request/Auth/UserLogInRequest.model';
 import { CodeMasterModel } from 'src/app/model/resource/CodeMaster.model';
 import { UdonShopModel } from 'src/app/model/resource/UdonShop.model';
 import { AuthService } from 'src/app/service/AuthService/Auth.service';
@@ -58,18 +57,6 @@ export class RandomContent implements OnInit {
         CategoryCd: CodeMasterService.HOLIDAY
       };
       await this.codeMasterService.getCodeMasters(request);
-      console.log("fetch");
-    } catch (e) {
-      ons.notification.alert({ title: CommonApplicationMessage.ERROR_TITLE, messageHTML: e });
-    }
-
-    // ログイン
-    const req: UserLogInRequestModel = {
-      userName: 'Admin',
-      password: 'pass'
-    };
-    try {
-      await this.authService.logIn(req);
     } catch (e) {
       ons.notification.alert({ title: CommonApplicationMessage.ERROR_TITLE, messageHTML: e });
     }

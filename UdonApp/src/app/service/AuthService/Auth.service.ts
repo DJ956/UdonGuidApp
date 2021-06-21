@@ -44,7 +44,7 @@ export class AuthService {
                         };
                         resolve(response);
                     } else {
-                        rejects(response.message);
+                        resolve(response);
                     }
                 }, (error) => {
                     rejects(CommonApplicationMessage.UNREACHBLE_SERVER + "<br>" + AuthService.name);
@@ -65,7 +65,7 @@ export class AuthService {
                         this._logInInfo = undefined;
                         resolve(response);
                     } else {
-                        rejects(response.message);
+                        resolve(response);
                     }
                 }, (error) => {
                     rejects(CommonApplicationMessage.UNREACHBLE_SERVER + "<br>" + AuthService.name);
@@ -86,7 +86,7 @@ export class AuthService {
                     if (response.returnCode === 0 && response.message === '') {
                         resolve(response);
                     } else {
-                        rejects(response.message);
+                        resolve(response);
                     }
                 }, (error) => {
                     rejects(CommonApplicationMessage.UNREACHBLE_SERVER + "<br>" + AuthService.name);

@@ -34,11 +34,7 @@ export class ShopCommentsService {
         return new Promise((resolve, rejects) => {
             this.repository.addComment(request).subscribe(
                 (response) => {
-                    if (response.returnCode === 0 && response.message === '') {
-                        resolve(response);
-                    } else {
-                        rejects(response.message);
-                    }
+                    resolve(response);
                 },
                 (error) => {
                     rejects(CommonApplicationMessage.UNREACHBLE_SERVER + "<br>" + ShopCommentsService.name);
@@ -55,11 +51,7 @@ export class ShopCommentsService {
         return new Promise((resolve, rejects) => {
             this.repository.removeComment(request).subscribe(
                 (response) => {
-                    if (response.returnCode === 0 && response.message === '') {
-                        resolve(response);
-                    } else {
-                        rejects(response.message);
-                    }
+                    resolve(response);
                 },
                 (error) => {
                     rejects(CommonApplicationMessage.UNREACHBLE_SERVER + "<br>" + ShopCommentsService.name);
@@ -82,7 +74,7 @@ export class ShopCommentsService {
                         this._commentListSubject.next(this._commentListOriginal);
                         resolve(response);
                     } else {
-                        rejects(response.message);
+                        resolve(response);
                     }
                 },
                 (error) => {

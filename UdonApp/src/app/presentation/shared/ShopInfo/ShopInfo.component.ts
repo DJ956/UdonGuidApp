@@ -10,7 +10,7 @@ import { CodeMasterService } from "src/app/service/CodeMasterService/CodeMaster.
 @Component({
     selector: 'app-ShopInfoComponent',
     templateUrl: './ShopInfo.component.html',
-    styleUrls: ['./ShopInfo.component.css']
+    styleUrls: ['./ShopInfo.component.scss']
 })
 @Injectable({
     providedIn: 'root'

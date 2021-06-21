@@ -7,7 +7,7 @@ import { Component, Injectable, OnInit } from "@angular/core";
 @Component({
     selector: 'app-LogInPage',
     templateUrl: './LogInPage.component.html',
-    styleUrls: ['./LogInPage.component.css']
+    styleUrls: ['./LogInPage.component.scss']
 })
 export class LogInPage implements OnInit {
 

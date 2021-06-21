@@ -1,14 +1,14 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 
 @Injectable({
-    providedIn:"root"
+    providedIn: "root"
 })
 @Component({
-    selector:"ons-page[app-FilterPage]",
-    templateUrl:"./FilterPage.html",
-    styleUrls:["./FilterPage.css"]
+    selector: "ons-page[app-FilterPage]",
+    templateUrl: "./FilterPage.html",
+    styleUrls: ["./FilterPage.scss"]
 })
 export class FilterPage {
-    
+
 
 }

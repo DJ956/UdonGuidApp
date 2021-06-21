@@ -17,14 +17,12 @@ import { UdonShopService } from "src/app/service/UdonShopService/UdonShop.servic
 @Component({
     selector: 'app-ShopDetailContent',
     templateUrl: './ShopDetailContent.component.html',
-    styleUrls: ['./ShopDetailContent.component.css', '../../../app.component.css']
+    styleUrls: ['./ShopDetailContent.component.scss', '../../../app.component.scss']
 })
 @Injectable({
     providedIn: 'root'
 })
 export class ShopDetailContent implements OnInit {
-    @ViewChild('modal') modal: ElementRef;
-
     /**ショップコメントオブサーバ*/
     shopCommentObserver: Observable<ShopCommentModel[]>;
     /**ショップコメントリスト */
@@ -52,8 +50,10 @@ export class ShopDetailContent implements OnInit {
 
 
     async ngOnInit() {
+        if (this.udonShop === undefined) { return; }
+
         const request: GetAllCommentRequestModel = {
-            userId: this.authService.logInInfo.userId,
+            userId: -1,
             accsessToken: 'A',
             shopId: this.udonShop.id
         };
@@ -76,18 +76,6 @@ export class ShopDetailContent implements OnInit {
         if (!this.authService.isLogIn()) {
             this.router.navigate(['login'], { queryParams: { link: 'shopDetail' } });
         }
-        this.modal.nativeElement.show();
+        this.router.navigate(['addComment']);
     }
-
-    onClickHideModal() {
-        this.modal.nativeElement.hide();
-    }
-
-    /**
-     * 店舗に対してコメントを追加する
-     */
-    onClickAddComment() {
-
-    }
-
 }

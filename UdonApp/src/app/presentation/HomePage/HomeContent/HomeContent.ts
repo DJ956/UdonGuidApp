@@ -10,7 +10,7 @@ import { FilterPage } from '../FilterPage/FilterPage/FilterPage';
 @Component({
   selector: 'app-HomeContent',
   templateUrl: './HomeContent.html',
-  styleUrls: ['./HomeContent.css'],
+  styleUrls: ['./HomeContent.scss'],
 })
 export class HomeContent {
   public random = RandomPage;

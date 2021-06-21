@@ -9,7 +9,7 @@ import { UdonShopService } from 'src/app/service/UdonShopService/UdonShop.servic
 @Component({
     selector: "app-FilterContent",
     templateUrl: "./FilterContent.html",
-    styleUrls: ["./FilterContent.css"]
+    styleUrls: ["./FilterContent.scss"]
 })
 export class FilterContent implements OnInit {
 

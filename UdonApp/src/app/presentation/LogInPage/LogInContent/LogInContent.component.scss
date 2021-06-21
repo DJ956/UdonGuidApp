@@ -2,13 +2,16 @@
     padding-top: 30px;
     border-radius: 10px;
     position: absolute;
-    top: 25%;
-    left: 25%;
+    top: 250;
+    left: 50%;
     text-align: center;
     width:50%;
     height: 50%;
     background-color: white;
     opacity: 0.85;
+    min-width: 300px;
+    min-height: 350px;
+    transform: translate(-50%, -50%);
 }
 
 .modal-input{

@@ -1,4 +1,6 @@
 import { Component, ElementRef, Injectable, ViewChild } from "@angular/core";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { UdonShopService } from "src/app/service/UdonShopService/UdonShop.service";
 
 @Injectable({
     providedIn: 'root'
@@ -6,19 +8,21 @@ import { Component, ElementRef, Injectable, ViewChild } from "@angular/core";
 @Component({
     selector: 'app-AddCommentContent',
     templateUrl: './AddCommentContent.component.html',
-    styleUrls: ['./AddCommentContent.component.css']
+    styleUrls: ['./AddCommentContent.component.scss', '../../../app.component.scss']
 })
 export class AddCommentContent {
-    @ViewChild('modal') modal: ElementRef;
 
-    constructor() { }
+    constructor(private shopService: UdonShopService,
+        private formBuilder: FormBuilder,
+    ) { }
 
-    public onClickShow() {
-        this.modal.nativeElement.show();
-    }
+    inputForm: FormGroup = this.formBuilder.group({
+        SHOP_NAME: ['', []],
+    });
 
-    public onClickHide() {
-        this.modal.nativeElement.hide();
+
+    getShopNameSuggests(): { name: string, id: number }[] {
+        return this.shopService.getShopNameSuggest();
     }
 
 }

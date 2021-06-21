@@ -6,7 +6,7 @@ import { UdonShopService } from "src/app/service/UdonShopService/UdonShop.servic
 @Component({
     selector: 'app-ShopCard',
     templateUrl: './ShopCard.component.html',
-    styleUrls: ['./ShopCard.component.css']
+    styleUrls: ['./ShopCard.component.scss']
 })
 export class ShopCard implements OnInit {
     /**

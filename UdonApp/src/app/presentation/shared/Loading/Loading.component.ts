@@ -7,7 +7,7 @@ import { LoadingService } from "src/app/service/LoadingService/Loading.service";
 @Component({
     selector: 'app-Loading',
     templateUrl: './Loading.component.html',
-    styleUrls: ['./Loading.component.css']
+    styleUrls: ['./Loading.component.scss']
 })
 export class LoadingComponent implements OnInit {
 

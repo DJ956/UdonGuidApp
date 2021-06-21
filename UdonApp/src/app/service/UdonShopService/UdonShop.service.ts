@@ -66,8 +66,7 @@ export class UdonShopService {
         if (this.businessCondition) {
             let toDay = new Date();
             let shopTime = new ShopTime(`${toDay.getHours()}:${toDay.getMinutes()}`);
-            //this.filterWithBusinnessTime(shopTime.getHours(), shopTime.getMinutes());
-            console.log("A");
+            //this.filterWithBusinnessTime(shopTime.getHours(), shopTime.getMinutes());            
         } else {
             this.filterClear();
         }
@@ -105,7 +104,6 @@ export class UdonShopService {
         this._pmCondition = value;
         if (this._pmCondition) {
             this.filterBetweenTime(15, 0);
-            console.log("B");
         } else {
             this.filterClear();
         }
@@ -122,8 +120,7 @@ export class UdonShopService {
         this._notHoliday = value;
         if (this._notHoliday) {
             let toDay = new Date();
-            //this.filterBusinessDay(toDay.getDay());
-            console.log("C");
+            //this.filterBusinessDay(toDay.getDay());            
         } else {
             this.filterClear();
         }
@@ -146,11 +143,24 @@ export class UdonShopService {
                     this.$filteredUdonShopList = this.$udonShopOriginList;
                     this.$uodonShopSubject.next(this.$filteredUdonShopList);
                     resolve(response);
-                } else { reject(response); }
+                } else { resolve(response); }
             }, error => {
                 reject(CommonApplicationMessage.UNREACHBLE_SERVER + "<br>" + UdonShopService.name);
             });
         });
+    }
+
+    /**
+     * 店舗名の候補を取得する
+     * #TODO:読み仮名で取得する
+     *  */
+    public getShopNameSuggest(): { name: string, id: number }[] {
+        let suggests: { name: string, id: number }[] = [];
+        this.$udonShopOriginList.forEach(udon => {
+            suggests.push({ name: udon.shopName, id: udon.id });
+        });
+        suggests = suggests.sort();
+        return [... new Set(suggests)];
     }
 
     /**

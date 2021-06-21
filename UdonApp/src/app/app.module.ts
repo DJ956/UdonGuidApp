@@ -31,6 +31,7 @@ import { ShopCommentsRepository } from './repository/ShopCommentsRepository/Shop
 import { ShopCommentsImplRepository } from './infra/repository/ShopCommentsRepository/ShopCommentsImpl.repository';
 import { LogInContent } from './presentation/LogInPage/LogInContent/LogInContent.component';
 import { LogInPage } from './presentation/LogInPage/LogInPage/LogInPage.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,8 @@ import { LogInPage } from './presentation/LogInPage/LogInPage/LogInPage.componen
     OnsenModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   entryComponents: [
     RandomPage,

@@ -15,7 +15,7 @@ import { AuthService } from "src/app/service/AuthService/Auth.service";
 @Component({
     selector: 'app-LogInContent',
     templateUrl: './LogInContent.component.html',
-    styleUrls: ['./LogInContent.component.css']
+    styleUrls: ['./LogInContent.component.scss']
 })
 export class LogInContent implements OnInit {
     @ViewChild('modal') modal: ElementRef;

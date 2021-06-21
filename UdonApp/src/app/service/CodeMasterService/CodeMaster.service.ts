@@ -36,10 +36,9 @@ export class CodeMasterService {
                 if (response.returnCode === 0) {
                     this.$holidaysOrign = response.codeMasters;
                     this.$holidaysSubject.next(this.$holidaysOrign);
-                    console.log("next");
                     resolve(response);
                 } else {
-                    rejects(response.message);
+                    resolve(response);
                 }
             }, error => {
                 rejects(CommonApplicationMessage.UNREACHBLE_SERVER + "<br>" + CodeMasterService.name);

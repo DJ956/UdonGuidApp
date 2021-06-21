@@ -1,3 +1,49 @@
-<ons-modal #modal>
+<ons-page>
+    <ons-toolbar>
+        <div class="left">
+            <ons-toolbar-button routerLink="/">
+                < 戻る</ons-toolbar-button>
+        </div>
+        <div class="center">うどんガイドブック</div>
+        <div class="right"></div>
+    </ons-toolbar>
 
-</ons-modal>
+    <div class="background"></div>
+
+    <div class="content">
+        <!-- ヘッダー -->
+        <ons-row class="header">
+            <ons-button style="background-color: red">クリア</ons-button>
+            <ons-button>コメント</ons-button>
+        </ons-row>
+
+        <form [formGroup]="inputForm" class="form-area">
+            <ons-row>
+                <!-- 店名 -->
+                <ons-row class="input-area">
+                    <label>店名:</label>
+                    <input type="text" class="text-input text-input--underbar" autocomplete="on" list="shops" />
+
+                    <!-- データリスト -->
+                    <datalist id="shops">
+                        <option *ngFor="let s of this.getShopNameSuggests()" value="{{s.name}}">
+                            {{s.id}}
+                        </option>
+                    </datalist>
+                </ons-row>
+
+                <!-- コメント -->
+                <ons-row class="input-area">
+                    <label>コメント:</label>
+                    <textarea class="textarea" rows="5" placeholder="コメント(500文字以内)" maxlength="500"></textarea>
+                </ons-row>
+
+                <!-- タグ -->
+                <ons-row class="input-area">
+                    <label>タグ:</label>
+                    <ons-input modifier="underbar" aria-placeholder="タグ"></ons-input>
+                </ons-row>
+            </ons-row>
+        </form>
+    </div>
+</ons-page>

@@ -7,7 +7,7 @@ import { Component, Injectable } from "@angular/core";
 @Component({
     selector: 'app-AddCommentPage',
     templateUrl: './AddCommentPage.component.html',
-    styleUrls: ['./AddCommentPage.component.css']
+    styleUrls: ['./AddCommentPage.component.scss']
 })
 export class AddCommentPage {
 

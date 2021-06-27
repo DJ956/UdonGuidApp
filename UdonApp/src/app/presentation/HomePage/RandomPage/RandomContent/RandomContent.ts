@@ -18,7 +18,7 @@ import { UdonShopService } from 'src/app/service/UdonShopService/UdonShop.servic
 @Component({
   selector: 'app-RandomContent',
   templateUrl: './RandomContent.html',
-  styleUrls: ['./RandomContent.scss', '../../../app.component.scss']
+  styleUrls: ['./RandomContent.scss', '../../../../app.component.scss']
 })
 export class RandomContent implements OnInit {
 

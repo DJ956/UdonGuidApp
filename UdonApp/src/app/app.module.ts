@@ -7,8 +7,6 @@ import { AppComponent } from './app.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HomeContent } from './presentation/HomePage/HomeContent/HomeContent';
 import { HomePage } from './presentation/HomePage/HomePage/HomePage';
-import { RandomPage } from './presentation/RandomPage/RandomPage/RandomPage';
-import { RandomContent } from './presentation/RandomPage/RandomContent/RandomContent';
 import { UdonShopRepository } from './repository/UdonShopRepository/UdonShop.repository';
 import { MockUdonShopRepository } from './infra/repository/UdonShopRepository/MockUdonShop.repository';
 import { FilterContent } from './presentation/HomePage/FilterPage/FilterContent/FilterContent';
@@ -32,6 +30,8 @@ import { ShopCommentsImplRepository } from './infra/repository/ShopCommentsRepos
 import { LogInContent } from './presentation/LogInPage/LogInContent/LogInContent.component';
 import { LogInPage } from './presentation/LogInPage/LogInPage/LogInPage.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RandomPage } from './presentation/HomePage/RandomPage/RandomPage/RandomPage';
+import { RandomContent } from './presentation/HomePage/RandomPage/RandomContent/RandomContent';
 
 @NgModule({
   declarations: [

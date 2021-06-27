@@ -1,7 +1,6 @@
 import { Component, Injectable } from '@angular/core';
 
-import * as ons from 'onsenui';
-import { RandomPage } from '../../RandomPage/RandomPage/RandomPage';
+import { RandomPage } from '../RandomPage/RandomPage/RandomPage';
 import { FilterPage } from '../FilterPage/FilterPage/FilterPage';
 
 @Injectable({

@@ -13,3 +13,42 @@
     background-color: white;
     justify-content: space-around;
 }
+
+.close-btn{
+    font-size: 20px;
+    width: 35px;
+    height: 35px;
+    line-height: 25px;
+    background-color: transparent;
+    color: gray;
+}
+
+
+// 評価マーク
+.radio-group{
+    .bl-form-radio{
+        display: none;
+
+        .checked{
+            background-color: orange;
+        }
+    }
+
+    label{
+        display: block;
+        float: left;
+        margin: 5px;
+        width: 20px;
+        height: 20px;
+        padding-left: 5px;
+        padding-right: 5px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    input[type="radio"]:checked + label{
+        ons-icon{
+            color: orange;
+        }
+    }
+}

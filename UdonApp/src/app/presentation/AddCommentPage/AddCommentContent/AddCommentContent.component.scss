@@ -4,16 +4,19 @@
     justify-content: space-around;
 }
 
-.form-area{
+.bl-form{
     margin-top: 15px;
     padding-left: 10px;
     padding-right: 10px;
     background-color: white;
     border-radius: 10px;
-}
 
+    .bl-form-input{
+        margin-top: 15px;
+        border-radius: 10px;
+    }
 
-.input-area{
-    margin-top: 15px;
-    border-radius: 10px;    
+    .bl-form-label{
+        min-width: 100px;
+    }
 }

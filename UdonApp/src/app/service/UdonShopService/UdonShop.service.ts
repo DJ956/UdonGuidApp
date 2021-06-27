@@ -151,13 +151,44 @@ export class UdonShopService {
     }
 
     /**
+     * 店舗IDと一致する店舗を取得する。存在しない場合はundefined
+     * @param shopId 
+     * @returns 
+     */
+    public findShopById(shopId: number): UdonShopModel {
+        const shop = this.$udonShopOriginList.find(u => {
+            return u.id === shopId;
+        });
+        return shop;
+    }
+
+    /**
+     * 店舗名と一致する店舗を取得する。存在しない場合はundefined
+     * @param shopName 
+     * @returns 
+     */
+    public findShopByName(shopName: string): UdonShopModel {
+        const shop = this.$udonShopOriginList.find(u => {
+            return u.shopName === shopName;
+        });
+        return shop;
+    }
+
+    /**
      * 店舗名の候補を取得する
      * #TODO:読み仮名で取得する
      *  */
     public getShopNameSuggest(): { name: string, id: number }[] {
         let suggests: { name: string, id: number }[] = [];
         this.$udonShopOriginList.forEach(udon => {
-            suggests.push({ name: udon.shopName, id: udon.id });
+            const exists: boolean = suggests.find(s => {
+                return s.name === udon.shopName;
+            }) !== undefined;
+
+            if (!exists) {
+                suggests.push({ name: udon.shopName, id: udon.id });
+            }
+
         });
         suggests = suggests.sort();
         return [... new Set(suggests)];

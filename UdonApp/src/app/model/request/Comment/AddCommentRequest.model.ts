@@ -6,8 +6,8 @@ import { BaseRequestModel } from "../BaseRequest.model";
  */
 export interface AddCommentRequestModel extends BaseRequestModel {
     /**アクセストークン */
-    accsessToken: string;
+    AccsessToken: string;
 
     /**投稿コメントモデル */
-    shopComment: ShopCommentModel;
+    ShopComment: ShopCommentModel;
 }

@@ -22,12 +22,36 @@
                 </ons-list-header>
                 <ons-list-item modifier="longdivider" *ngFor="let shopComment of this.shopCommentList">
                     <ons-card style="width: 100%;">
-                        <div class="title">
-                            投稿者:{{shopComment.userId}}
-                        </div>
+                        <!-- ヘッダー -->
+                        <ons-row>
+                            <ons-col width="80%">
+                                <h4 class="title">投稿者:{{shopComment.userId}}</h4>
+                            </ons-col>
+                            <!-- 削除ボタン -->
+                            <ons-col *ngIf="this.isOwnComment(shopComment.userId)" width="20%">
+                                <ons-button (click)="this.onClickRemoveComment(shopComment)" class="close-btn"
+                                    icon="fa-close">
+                                </ons-button>
+                            </ons-col>
+                        </ons-row>
                         <div class="content">
-                            <p>タグ:{{shopComment.tag}}</p>
-                            <p>{{shopComment.comment}}</p>
+                            <p *ngIf="shopComment.tag !== ''">タグ:{{shopComment.tag}}</p>
+                            <p>コメント:{{shopComment.comment}}</p>
+                            <!-- 評価 -->
+                            <label style="display: block;">評価:{{shopComment.star}}</label>
+                            <div class="radio-group">
+                                <ng-container *ngFor="let i  of [1,2,3,4,5];">
+                                    <input type="radio" class="bl-form-radio" name="STAR" readonly />
+                                    <label [attr.for]="'star-' + i">
+                                        <ons-icon *ngIf="shopComment.star >= i" style="color: orange;" icon="fa-star"
+                                            size="20px">
+                                        </ons-icon>
+
+                                        <ons-icon *ngIf="shopComment.star < i" icon="fa-star" size="20px">
+                                        </ons-icon>
+                                    </label>
+                                </ng-container>
+                            </div>
                         </div>
                     </ons-card>
                 </ons-list-item>

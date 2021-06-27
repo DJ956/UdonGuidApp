@@ -13,35 +13,68 @@
     <div class="content">
         <!-- ヘッダー -->
         <ons-row class="header">
-            <ons-button style="background-color: red">クリア</ons-button>
-            <ons-button>コメント</ons-button>
+            <ons-col></ons-col>
+            <ons-col></ons-col>
+            <ons-col>
+                <ons-button style="justify-items: right;" (click)="onClickCommentBtn()">コメント</ons-button>
+            </ons-col>
         </ons-row>
 
-        <form [formGroup]="inputForm" class="form-area">
+        <!-- 登録店舗 -->
+        <ng-container *ngIf="this.shopModel !== undefined">
+            <app-ShopCard [shop]="this.shopModel"></app-ShopCard>
+        </ng-container>
+
+
+        <form [formGroup]="inputForm" class="bl-form">
             <ons-row>
                 <!-- 店名 -->
-                <ons-row class="input-area">
-                    <label>店名:</label>
-                    <input type="text" class="text-input text-input--underbar" autocomplete="on" list="shops" />
+                <ons-row class="bl-form-input">
+                    <ng-container *ngIf="this.shopModel === undefined">
+                        <label class="bl-form-label">店名:</label>
+                        <input type="text" class="text-input text-input--underbar" autocomplete="on" list="shops"
+                            formControlName="SHOP_NAME" />
 
-                    <!-- データリスト -->
-                    <datalist id="shops">
-                        <option *ngFor="let s of this.getShopNameSuggests()" value="{{s.name}}">
-                            {{s.id}}
-                        </option>
-                    </datalist>
+                        <!-- データリスト -->
+                        <datalist id="shops">
+                            <option *ngFor="let s of this.getShopNameSuggests()" value="{{s.name}}">
+                                {{s.id}}
+                            </option>
+                        </datalist>
+                    </ng-container>
+
                 </ons-row>
 
                 <!-- コメント -->
-                <ons-row class="input-area">
-                    <label>コメント:</label>
-                    <textarea class="textarea" rows="5" placeholder="コメント(500文字以内)" maxlength="500"></textarea>
+                <ons-row class="bl-form-input">
+                    <label class="bl-form-label">コメント:</label>
+                    <textarea class="textarea" rows="5" placeholder="コメント(500文字以内)" maxlength="500"
+                        formControlName="COMMENT"></textarea>
                 </ons-row>
 
                 <!-- タグ -->
-                <ons-row class="input-area">
-                    <label>タグ:</label>
-                    <ons-input modifier="underbar" aria-placeholder="タグ"></ons-input>
+                <ons-row class="bl-form-input">
+                    <label class="bl-form-label">タグ:</label>
+                    <ons-input modifier="underbar" aria-placeholder="タグ" formControlName="TAG"></ons-input>
+                </ons-row>
+
+                <!-- 評価 -->
+                <ons-row class="bl-form-input">
+                    <label class="bl-form-label">評価:</label>
+                    <div class="radio-group">
+                        <ng-container *ngFor="let i  of [1,2,3,4,5];">
+                            <input type="radio" class="bl-form-radio" name="STAR" id="star-{{i}}" value="{{i}}"
+                                formControlName="STAR" />
+                            <label [attr.for]="'star-' + i">
+                                <ons-icon *ngIf="this.inputForm.get('STAR').value >= i" style="color: orange;"
+                                    icon="fa-star" size="20px">
+                                </ons-icon>
+
+                                <ons-icon *ngIf="this.inputForm.get('STAR').value < i" icon="fa-star" size="20px">
+                                </ons-icon>
+                            </label>
+                        </ng-container>
+                    </div>
                 </ons-row>
             </ons-row>
         </form>

@@ -1,7 +1,16 @@
 <ons-page>
     <ons-toolbar>
         <div class="center">うどんガイドブック</div>
+        <div class="right">
+            <ons-toolbar-button *ngIf="this.isLogin()" (click)="onClickLogOutBtn()">
+                <span>ログアウト</span>
+            </ons-toolbar-button>
+
+            <ons-toolbar-button *ngIf="!this.isLogin()" (click)="onClickLogInBtn()">
+                <span>ログイン</span>
+            </ons-toolbar-button>
+        </div>
     </ons-toolbar>
-    
+
     <app-HomeContent></app-HomeContent>
 </ons-page>

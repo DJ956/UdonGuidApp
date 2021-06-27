@@ -59,6 +59,7 @@ export class LogInContent implements OnInit {
         this.newPassword = "";
         this.repassword = "";
 
+        this.forwardLink = "";
         this.activatedRouter.queryParams.subscribe((params) => {
             this.forwardLink = params.link;
         });
@@ -83,13 +84,16 @@ export class LogInContent implements OnInit {
             const response: UserLogInResponseModel = await this.authService.logIn(request);
             if (response.returnCode === 0 && response.message === '') {
                 ons.notification.alert({ title: 'ログイン', messageHTML: 'ユーザのログインに成功しました。' });
-                this.onClickCloseModal();
-                this.router.navigate([this.forwardLink]);
+                if (this.forwardLink === undefined) {
+                    this.router.navigate(['']);
+                } else {
+                    this.router.navigate([this.forwardLink]);
+                }
             } else {
                 ons.notification.alert({ title: 'エラー', messageHTML: `${response.message}` });
             }
         } catch (e) {
-            ons.notification.alert({ title: 'エラー', messageHTML: CommonApplicationMessage.UNREACHBLE_SERVER });
+            ons.notification.alert({ title: 'エラー', messageHTML: e });
         }
     }
 
